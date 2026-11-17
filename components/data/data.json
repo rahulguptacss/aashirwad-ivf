@@ -1,0 +1,190 @@
+{
+  "common": {
+    "Header": {
+      "logo_text": "Aashirwad",
+      "logo": "/logo/logo.webp",
+      "links": [
+        { "name": "Home", "href": "#home" },
+        { "name": "About Us", "href": "#about" },
+        { "name": "Treatment", "href": "#treatments" },
+        { "name": "Why Choose Us", "href": "#why" },
+        { "name": "Testimonial", "href": "#stories" },
+        { "name": "FAQs", "href": "#faq" }
+      ],
+      "button_text": "Book Appointment",
+      "button_href": "#contact",
+      "phone": "+100000000000",
+      "phone_href": "tel:+100000000000"
+    },
+    "Footer": {
+      "logo_text": "Aashirwad IVF",
+      "logo": "/logo/white-logo.webp",
+      "description": "A trusted fertility clinic offering advanced IVF treatments with personalized care, compassion and a high focus on successful parenthood.",
+      "address": "123 Education Lane, New York, NY 10001",
+      "phone": "+100000000000",
+      "email": "info@xyz.com",
+      "links": [
+        { "name": "Home", "href": "#home" },
+        { "name": "About Us", "href": "#about" },
+        { "name": "Treatment", "href": "#treatments" },
+        { "name": "Why Choose Us", "href": "#why" },
+        { "name": "Testimonial", "href": "#stories" },
+        { "name": "FAQs", "href": "#faq" },
+        { "name": "Contact Us", "href": "#contact" }
+      ],
+      "socials": [
+        { "name": "Facebook", "href": "https://facebook.com" },
+        { "name": "Instagram", "href": "https://instagram.com" },
+        { "name": "LinkedIn", "href": "https://linkedin.com" },
+        { "name": "YouTube", "href": "https://youtube.com" }
+      ],
+      "copyright": "Copyright © 2026. All rights reserved. Powered by Lestow"
+    },
+    "BackToTop": { "aria_label": "Back to top" }
+  },
+  "categories": {
+    "Healthcare": {
+      "templateComponents": {
+        "template-1": {
+          "pages": {
+            "home": {
+              "title": "Home",
+              "pageName": "Home",
+              "metadata": {
+                "title": "Aashirwad IVF | Advanced IVF Care",
+                "description": "Advanced IVF care to make the dream of parenthood a reality."
+              },
+              "components": [
+                { "key": "HeroSection", "component": "Hero" },
+                { "key": "AboutSection", "component": "About" },
+                { "key": "TreatmentsSection", "component": "Treatments" },
+                { "key": "WhySection", "component": "WhyChoose" },
+                { "key": "StoriesSection", "component": "Testimonials" },
+                { "key": "FaqSection", "component": "Faq" },
+                { "key": "ContactSection", "component": "Contact" }
+              ]
+            }
+          },
+          "sections": {
+            "hero": {
+              "id": "home",
+              "eyebrow": "Your Parenthood Journey with Expert Care",
+              "title_start": "Advanced",
+              "title_highlight": "IVF",
+              "title_mid": "Care to Make Your Dream of",
+              "title_end": "Parenthood a Reality",
+              "image": "/img/hero.webp",
+              "couple_image": "/img/couple.webp"
+            },
+            "about": {
+              "id": "about",
+              "eyebrow": "About Us",
+              "title": "Expert IVF Care for Your",
+              "title_highlight": "Parenthood Journey",
+              "description": "Aashirwad IVF is a specialized fertility center offering advanced treatments, experienced specialists and compassionate care to help you achieve your dream of a family.",
+              "button_text": "Know More About Us",
+              "button_href": "#why",
+              "image": "/img/about.webp"
+            },
+            "treatments": {
+              "id": "treatments",
+              "eyebrow": "Our Treatments",
+              "title": "Our IVF",
+              "title_highlight": "Treatments",
+              "items": [
+                { "title": "IVF Treatment", "text": "Advanced fertility treatment to help you conceive.", "icon": "cells", "image": "/img/treatment-ivf.webp" },
+                { "title": "IUI Treatment", "text": "A simpler, effective procedure to improve your chance of pregnancy.", "icon": "calendar", "image": "/img/couple.webp" },
+                { "title": "ICSI Treatment", "text": "A specialized IVF technique for higher success rates.", "icon": "dna", "image": "/img/treatment-icsi.webp" },
+                { "title": "Embryo Freezing", "text": "Preserve healthy embryos for future pregnancy plans.", "icon": "snow", "image": "/img/lab.webp" },
+                { "title": "Fertility Consultation", "text": "A first visit to review reports and plan the right treatment.", "icon": "calendar", "image": "/img/about.webp" }
+              ]
+            },
+            "why": {
+              "id": "why",
+              "eyebrow": "Why Choose Us",
+              "title": "Your Trusted Partner in",
+              "title_highlight": "IVF & Fertility Care",
+              "image": "/img/why.webp",
+              "lab_image": "/img/lab.webp",
+              "couple_image": "/img/couple.webp",
+              "points": [
+                { "icon": "cells", "title": "Advanced IVF Technology", "text": "Modern labs for higher success rates" },
+                { "icon": "doctor", "title": "Experienced Specialists", "text": "A skilled and compassionate fertility team" },
+                { "icon": "heart", "title": "Personalized Care", "text": "Treatment tailored to your unique needs" },
+                { "icon": "shield", "title": "Safe & Confidential", "text": "Your privacy and comfort are our priority" }
+              ]
+            },
+            "testimonials": {
+              "id": "stories",
+              "eyebrow": "Client Testimonials",
+              "title": "Heartfelt Reviews from",
+              "title_highlight": "Our IVF Families",
+              "stat_value": "1,000+ Happy Families",
+              "stat_text": "Trusted IVF care with high success rates",
+              "avatars": [
+                "/img/avatar-1.webp",
+                "/img/avatar-2.webp",
+                "/img/avatar-3.webp"
+              ],
+              "items": [
+                {
+                  "quote": "The care and support we received throughout our IVF journey was wonderful. The team is truly compassionate and professional. We are now blessed with our little one!",
+                  "name": "Priya Sharma",
+                  "role": "IVF Patient",
+                  "image": "/img/avatar-1.webp",
+                  "stars": 5
+                },
+                {
+                  "quote": "From the first consult to the transfer, the plan was clear. We always knew who to call, and the doctors explained every scan.",
+                  "name": "Anika Rao",
+                  "role": "IVF Patient",
+                  "image": "/img/avatar-3.webp",
+                  "stars": 5
+                }
+              ]
+            },
+            "faq": {
+              "id": "faq",
+              "eyebrow": "FAQs",
+              "title": "Frequently Asked",
+              "title_highlight": "Questions",
+              "description": "Find answers to common questions about our IVF treatments, process, and care.",
+              "items": [
+                { "question": "What is IVF?", "answer": "IVF (In Vitro Fertilization) is a fertility treatment where eggs are fertilized with sperm in a lab, and the resulting embryo is transferred to the uterus." },
+                { "question": "Who can benefit from IVF treatment?", "answer": "Couples with blocked tubes, low sperm count, unexplained infertility, or failed simpler treatments are often assessed for IVF." },
+                { "question": "How long does the IVF process take?", "answer": "One stimulated cycle is usually a few weeks, from the first scan to the embryo transfer." },
+                { "question": "What is the success rate of IVF?", "answer": "Success depends on age, reports, and the clinic plan. Your doctor will share a realistic range before you start." },
+                { "question": "Is IVF a safe procedure?", "answer": "It is a routine medical procedure. Your doctor reviews medicines, scans, and risks before treatment begins." },
+                { "question": "How much does IVF treatment cost?", "answer": "Cost depends on the tests, medicines, and whether freezing is needed. The clinic shares a clear estimate at the first visit.", "image": "/img/hero.webp" }
+              ]
+            },
+            "contact": {
+              "id": "contact",
+              "eyebrow": "Contact Us",
+              "title": "Get in",
+              "title_highlight": "Touch",
+              "title_end": "with Us",
+              "description": "Have questions about our treatments or want to book a consultation? We're here to help you at every step of your fertility journey.",
+              "form_title": "Send Us a",
+              "form_title_highlight": "Message",
+              "location_title": "Our Location",
+              "call_title": "Call Us",
+              "email_title": "Email Us",
+              "address": "123 Education Lane, New York, NY 10001",
+              "phone": "+100000000000",
+              "email": "info@xyz.com",
+              "name_placeholder": "Your Name",
+              "email_placeholder": "Your Email",
+              "phone_placeholder": "Your Phone",
+              "date_placeholder": "Preferred Date",
+              "message_placeholder": "Your Message",
+              "button_text": "Request a Consultation",
+              "success_message": "Thanks. We have your message.",
+              "map_embed": "https://maps.google.com/maps?q=123%20Education%20Lane%2C%20New%20York%2C%20NY%2010001&z=14&output=embed"
+            }
+          }
+        }
+      }
+    }
+  }
+}
