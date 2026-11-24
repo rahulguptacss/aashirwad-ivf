@@ -1,27 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { HeaderData } from '../../types';
 
 export default function Header({ data }: { data: HeaderData }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(data.links[0]?.href ?? '#home');
+  const isClickScrolling = useRef(false);
 
   const scrollTo = (href: string) => {
     setActive(href);
-    const wasOpen = open;
-    if (wasOpen) setOpen(false);
+    isClickScrolling.current = true;
+    setOpen(false);
 
-    const doScroll = () => {
-      const id = href.replace('#', '');
-      if (id === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
+    const id = href.replace('#', '');
+    const headerOffset = 76;
+
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
       const el = document.getElementById(id);
       if (el) {
-        const headerOffset = 76;
         const elementPosition = el.getBoundingClientRect().top;
         const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop) - headerOffset;
         window.scrollTo({
@@ -29,27 +29,43 @@ export default function Header({ data }: { data: HeaderData }) {
           behavior: 'smooth',
         });
       }
-    };
-
-    if (wasOpen) {
-      window.setTimeout(doScroll, 300);
-    } else {
-      doScroll();
     }
+
+    window.setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 850);
   };
 
   useEffect(() => {
     const onScroll = () => {
-      const headerOffset = 130;
-      let current = data.links[0]?.href ?? '#home';
-      data.links.forEach((link) => {
-        const section = document.getElementById(link.href.replace('#', ''));
-        if (section && section.getBoundingClientRect().top <= headerOffset) {
-          current = link.href;
+      if (isClickScrolling.current) return;
+
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      if (scrollY + windowHeight >= docHeight - 60) {
+        const lastLink = data.links[data.links.length - 1];
+        if (lastLink) {
+          setActive(lastLink.href);
+          return;
         }
-      });
+      }
+
+      const headerOffset = 140;
+      let current = data.links[0]?.href ?? '#home';
+      for (const link of data.links) {
+        const section = document.getElementById(link.href.replace('#', ''));
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= headerOffset) {
+            current = link.href;
+          }
+        }
+      }
       setActive(current);
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
@@ -60,7 +76,7 @@ export default function Header({ data }: { data: HeaderData }) {
   }, [data.links]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)]">
+    <header className="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.04)] relative">
       <div className="mx-auto flex h-[72px] max-w-[1240px] items-center justify-between gap-2 px-3 sm:h-[78px] sm:gap-4 sm:px-4">
         <a href="#home" className="min-w-0 shrink">
           <img src={data.logo} alt={data.logo_text} className="h-11 w-auto max-w-[132px] object-contain object-left sm:h-14 sm:max-w-none" />
@@ -69,7 +85,15 @@ export default function Header({ data }: { data: HeaderData }) {
           {data.links.map((link) => {
             const on = active === link.href;
             return (
-              <a key={link.name} href={link.href} className={`relative pb-1 text-[15px] font-medium ${on ? 'text-[#d0126b]' : 'text-[#2a2a2a]'}`}>
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollTo(link.href);
+                }}
+                className={`relative pb-1 text-[15px] font-medium transition-colors ${on ? 'text-[#d0126b]' : 'text-[#2a2a2a] hover:text-[#d0126b]'}`}
+              >
                 {link.name}
                 {on && <span className="absolute -bottom-1 left-0 h-[2px] w-8 rounded-full bg-[#d0126b]" />}
               </a>
@@ -77,7 +101,14 @@ export default function Header({ data }: { data: HeaderData }) {
           })}
         </nav>
         <div className="hidden items-center gap-4 lg:flex">
-          <a href={data.button_href} className="inline-flex items-center gap-2 rounded-full bg-[#e11d74] px-4 py-2 text-[14px] font-semibold text-white">
+          <a
+            href={data.button_href}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollTo(data.button_href);
+            }}
+            className="inline-flex items-center gap-2 rounded-full bg-[#e11d74] px-4 py-2 text-[14px] font-semibold text-white shadow-sm hover:bg-[#c2186a] transition-colors"
+          >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg>
             {data.button_text}
           </a>
@@ -112,11 +143,11 @@ export default function Header({ data }: { data: HeaderData }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="overflow-hidden border-t border-[#f3d5e2] bg-white px-4 lg:hidden"
+            className="absolute left-0 top-full w-full max-h-[calc(100vh-80px)] overflow-y-auto border-t border-[#f3d5e2] bg-white px-4 shadow-[0_16px_36px_rgba(0,0,0,0.12)] lg:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28 }}
+            transition={{ duration: 0.24 }}
           >
             <nav className="flex flex-col gap-1 py-3">
               {data.links.map((link, index) => {
@@ -129,10 +160,10 @@ export default function Header({ data }: { data: HeaderData }) {
                       event.preventDefault();
                       scrollTo(link.href);
                     }}
-                    className={`rounded-xl px-3 py-2.5 text-[15px] font-medium ${on ? 'bg-[#fff1f6] text-[#d0126b] font-semibold' : 'text-[#3f3f46]'}`}
+                    className={`rounded-xl px-3 py-2.5 text-[15px] font-medium transition-colors ${on ? 'bg-[#fff1f6] text-[#d0126b] font-semibold' : 'text-[#3f3f46] hover:bg-[#fde7f1]/30'}`}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04 * index }}
+                    transition={{ delay: 0.03 * index }}
                   >
                     {link.name}
                   </motion.a>
