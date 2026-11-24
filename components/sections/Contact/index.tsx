@@ -2,10 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Playfair_Display } from 'next/font/google';
 import type { ContactSectionData } from '../../types';
 
-const playfair = Playfair_Display({ subsets: ['latin'], weight: ['600'], style: ['normal', 'italic'] });
 const field = 'h-12 w-full rounded-xl border border-[#f3d0de] bg-white pl-10 pr-3 text-[14px] outline-none placeholder:text-[#9ca3af]';
 
 export default function Contact({ data }: { data: ContactSectionData }) {
@@ -20,10 +18,10 @@ export default function Contact({ data }: { data: ContactSectionData }) {
             <span className="h-1.5 w-1.5 rounded-full bg-[#c2186a]" />
             {data.eyebrow}
           </span>
-          <h2 className={`${playfair.className} mt-4 text-[36px] font-semibold leading-tight text-[#1d2433] sm:text-[46px]`}>
-            {data.title} <span className="italic text-[#c2186a]">{data.title_highlight}</span> {data.title_end}
+          <h2 className="mt-3 text-[24px] font-bold leading-tight text-[#1d2433] sm:text-[36px] lg:text-[44px]">
+            {data.title} <span className="text-[#c2186a]">{data.title_highlight}</span> {data.title_end}
           </h2>
-          <p className="mt-3 max-w-[460px] text-[15px] leading-7 text-[#6b7280]">{data.description}</p>
+          <p className="mt-2 max-w-[460px] text-[14px] sm:text-[15px] leading-relaxed text-[#6b7280]">{data.description}</p>
           <ul className="mt-6 space-y-5">
             {[
               { icon: 'pin', title: data.location_title, value: data.address, href: '' },
@@ -56,8 +54,8 @@ export default function Contact({ data }: { data: ContactSectionData }) {
             setSent(true);
           }}
         >
-          <h3 className={`${playfair.className} text-[28px] font-semibold text-[#1d2433] sm:text-[34px]`}>
-            {data.form_title} <span className="italic text-[#c2186a]">{data.form_title_highlight}</span>
+          <h3 className="text-[20px] sm:text-[26px] lg:text-[30px] font-bold leading-tight text-[#1d2433]">
+            {data.form_title} <span className="text-[#c2186a]">{data.form_title_highlight}</span>
           </h3>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <label className="relative">

@@ -1,14 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Playfair_Display } from 'next/font/google';
+import { motion } from 'framer-motion';
 import type { FaqSectionData } from '../../types';
 
-const playfair = Playfair_Display({ subsets: ['latin'], weight: ['600'], style: ['normal', 'italic'] });
-
 export default function Faq({ data }: { data: FaqSectionData }) {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id={data.id} className="overflow-hidden bg-white py-10 sm:py-14">
@@ -19,35 +16,41 @@ export default function Faq({ data }: { data: FaqSectionData }) {
               <span className="h-1.5 w-1.5 rounded-full bg-[#c2186a]" />
               {data.eyebrow}
             </span>
-            <h2 className={`${playfair.className} mt-3 text-[34px] font-semibold leading-tight text-[#1d2433] sm:text-[46px]`}>
-              {data.title} <span className="italic text-[#c2186a]">{data.title_highlight}</span>
+            <h2 className="mt-3 text-[24px] font-bold leading-tight text-[#1d2433] sm:text-[36px] lg:text-[44px]">
+              {data.title} <span className="text-[#c2186a]">{data.title_highlight}</span>
             </h2>
-            <p className="mt-2 text-[15px] text-[#6b7280]">{data.description}</p>
+            <p className="mt-2 text-[14px] sm:text-[15px] leading-relaxed text-[#6b7280]">{data.description}</p>
           </motion.div>
           <div className="mt-6 space-y-3">
             {data.items.map((item, index) => {
               const active = open === index;
               return (
-                <motion.div
+                <div
                   key={item.question}
-                  className={`overflow-hidden rounded-2xl border ${active ? 'border-[#f3b4cc] bg-[#fff1f6]' : 'border-[#f3d5e2] bg-white'}`}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={`overflow-hidden rounded-2xl border transition-colors duration-200 ${active ? 'border-[#f3b4cc] bg-[#fff1f6]' : 'border-[#f3d5e2] bg-white hover:border-[#f3b4cc]/60'}`}
                 >
-                  <button type="button" onClick={() => setOpen(active ? -1 : index)} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-[16px] font-semibold text-[#1d2433]">
-                    {item.question}
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e11d74] text-lg leading-none text-white">{active ? '−' : '+'}</span>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(active ? null : index)}
+                    className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-[15px] sm:text-[16px] font-semibold text-[#1d2433] transition-colors"
+                  >
+                    <span>{item.question}</span>
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#e11d74] text-lg font-bold leading-none text-white transition-transform duration-200">
+                      {active ? '−' : '+'}
+                    </span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {active && (
-                      <motion.p className="px-4 pb-4 text-[14px] leading-6 text-[#4b5563]" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}>
+                  <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
+                      active ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-4 pb-4 text-[14px] leading-6 text-[#4b5563]">
                         {item.answer}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </div>

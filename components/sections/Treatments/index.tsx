@@ -2,10 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { Playfair_Display } from 'next/font/google';
 import type { TreatmentItem, TreatmentsSectionData } from '../../types';
-
-const playfair = Playfair_Display({ subsets: ['latin'], weight: ['600'], style: ['normal', 'italic'] });
 
 function Icon({ name }: { name: string }) {
   const common = 'h-7 w-7';
@@ -107,8 +104,8 @@ export default function Treatments({ data }: { data: TreatmentsSectionData }) {
               <span className="h-1.5 w-1.5 rounded-full bg-[#c2186a]" />
               {data.eyebrow}
             </span>
-            <h2 className={`${playfair.className} mt-3 text-[34px] font-semibold text-[#1d2433] sm:text-[46px]`}>
-              {data.title} <span className="italic text-[#c2186a]">{data.title_highlight}</span>
+            <h2 className="mt-3 text-[24px] font-bold leading-tight text-[#1d2433] sm:text-[36px] lg:text-[44px]">
+              {data.title} <span className="text-[#c2186a]">{data.title_highlight}</span>
             </h2>
           </motion.div>
           {canSlide && (

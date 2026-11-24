@@ -9,20 +9,44 @@ export default function Header({ data }: { data: HeaderData }) {
   const [active, setActive] = useState(data.links[0]?.href ?? '#home');
 
   const scrollTo = (href: string) => {
-    const id = href.replace('#', '');
-    setOpen(false);
-    window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 280);
+    setActive(href);
+    const wasOpen = open;
+    if (wasOpen) setOpen(false);
+
+    const doScroll = () => {
+      const id = href.replace('#', '');
+      if (id === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const el = document.getElementById(id);
+      if (el) {
+        const headerOffset = 76;
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop) - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    };
+
+    if (wasOpen) {
+      window.setTimeout(doScroll, 300);
+    } else {
+      doScroll();
+    }
   };
 
   useEffect(() => {
     const onScroll = () => {
-      const line = 110;
+      const headerOffset = 130;
       let current = data.links[0]?.href ?? '#home';
       data.links.forEach((link) => {
         const section = document.getElementById(link.href.replace('#', ''));
-        if (section && section.getBoundingClientRect().top <= line) current = link.href;
+        if (section && section.getBoundingClientRect().top <= headerOffset) {
+          current = link.href;
+        }
       });
       setActive(current);
     };
@@ -65,17 +89,24 @@ export default function Header({ data }: { data: HeaderData }) {
           </a>
         </div>
         <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
-        <a href={data.button_href} className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#e11d74] px-3 py-2 text-[12px] font-semibold text-white sm:text-[13px]">
-          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg>
-          {data.button_text}
-        </a>
-        <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full text-[#2a2a2a]" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-          <span className="relative block h-4 w-5">
-            <motion.span className="absolute left-0 h-[2px] w-5 rounded-full bg-[#2a2a2a]" animate={{ top: open ? 7 : 0, rotate: open ? 45 : 0 }} />
-            <motion.span className="absolute left-0 top-[7px] h-[2px] w-5 rounded-full bg-[#2a2a2a]" animate={{ opacity: open ? 0 : 1 }} />
-            <motion.span className="absolute left-0 h-[2px] w-5 rounded-full bg-[#2a2a2a]" animate={{ top: open ? 7 : 14, rotate: open ? -45 : 0 }} />
-          </span>
-        </button>
+          <a
+            href={data.button_href}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollTo(data.button_href);
+            }}
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#e11d74] px-3 py-2 text-[12px] font-semibold text-white sm:text-[13px]"
+          >
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg>
+            {data.button_text}
+          </a>
+          <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full text-[#2a2a2a] hover:bg-[#fde7f1]/50 transition-colors" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+            <span className="relative block h-4 w-5">
+              <motion.span className="absolute left-0 h-[2px] w-5 rounded-full bg-[#2a2a2a]" animate={{ top: open ? 7 : 0, rotate: open ? 45 : 0 }} />
+              <motion.span className="absolute left-0 top-[7px] h-[2px] w-5 rounded-full bg-[#2a2a2a]" animate={{ opacity: open ? 0 : 1 }} />
+              <motion.span className="absolute left-0 h-[2px] w-5 rounded-full bg-[#2a2a2a]" animate={{ top: open ? 7 : 14, rotate: open ? -45 : 0 }} />
+            </span>
+          </button>
         </div>
       </div>
       <AnimatePresence>
@@ -98,7 +129,7 @@ export default function Header({ data }: { data: HeaderData }) {
                       event.preventDefault();
                       scrollTo(link.href);
                     }}
-                    className={`rounded-xl px-3 py-2.5 text-[15px] font-medium ${on ? 'bg-[#fff1f6] text-[#d0126b]' : 'text-[#3f3f46]'}`}
+                    className={`rounded-xl px-3 py-2.5 text-[15px] font-medium ${on ? 'bg-[#fff1f6] text-[#d0126b] font-semibold' : 'text-[#3f3f46]'}`}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * index }}

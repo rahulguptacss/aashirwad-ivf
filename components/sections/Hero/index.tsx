@@ -15,15 +15,15 @@ export default function Hero({ data }: { data: HeroSectionData }) {
       />
       <div className="relative mx-auto grid max-w-[1180px] items-center gap-2 px-4 py-8 sm:px-5 sm:py-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6 lg:py-6">
         <motion.div className="text-center lg:text-left" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.55 }}>
-          <p className="mx-auto max-w-[280px] text-[13px] font-semibold uppercase leading-6 tracking-[0.12em] text-[#e11d74] sm:max-w-none sm:text-[14px] sm:tracking-[0.16em] lg:mx-0">{data.eyebrow}</p>
-          <h1 className="mx-auto mt-4 max-w-[560px] text-[32px] font-bold leading-[1.15] text-[#1d2433] sm:text-[42px] lg:mx-0 lg:text-[52px]">
+          <p className="mx-auto max-w-[280px] text-[12px] font-semibold uppercase leading-5 tracking-[0.12em] text-[#e11d74] sm:max-w-none sm:text-[14px] sm:tracking-[0.16em] lg:mx-0">{data.eyebrow}</p>
+          <h1 className="mx-auto mt-3 max-w-[560px] text-[26px] font-bold leading-tight text-[#1d2433] sm:text-[38px] sm:leading-[1.15] lg:mx-0 lg:text-[50px]">
             {data.title_start} <span className="text-[#2f6bff]">{data.title_highlight}</span> {data.title_mid}{' '}
             <span className="text-[#c2186a]">{data.title_end}</span>
           </h1>
           <motion.img
             src={data.couple_image}
             alt=""
-            className="mx-auto mt-6 h-[86px] w-[168px] rounded-2xl object-cover shadow-md sm:h-[110px] sm:w-[200px] lg:mx-0 lg:mt-8"
+            className="hidden sm:block mx-auto mt-6 h-[110px] w-[200px] rounded-2xl object-cover shadow-md lg:mx-0 lg:mt-8"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

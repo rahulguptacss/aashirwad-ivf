@@ -56,7 +56,17 @@ export default function Footer({ data }: { data: FooterData }) {
             </a>
           ))}
         </div>
-        <div className="mt-6 border-t border-white/70 pt-3 pb-0 text-[14px]">{data.copyright}</div>
+        <div className="mt-6 border-t border-white/20 pt-4 pb-1 text-[13px] sm:text-[14px] text-white/90">
+          {data.copyright.includes('Powered by Lestow') ? (
+            <>
+              {data.copyright.replace('Powered by Lestow', '')}
+              <span>Powered by </span>
+              <span className="font-semibold text-white">Lestow</span>
+            </>
+          ) : (
+            data.copyright
+          )}
+        </div>
       </motion.div>
     </footer>
   );

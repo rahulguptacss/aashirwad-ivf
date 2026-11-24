@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Playfair_Display } from 'next/font/google';
 import type { AboutSectionData } from '../../types';
-
-const playfair = Playfair_Display({ subsets: ['latin'], weight: ['600'], style: ['normal', 'italic'] });
 
 export default function About({ data }: { data: AboutSectionData }) {
   return (
@@ -29,13 +26,13 @@ export default function About({ data }: { data: AboutSectionData }) {
           transition={{ duration: 0.55 }}
         >
           <span className="inline-flex rounded-full bg-[#fde7f1] px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[#c2186a]">{data.eyebrow}</span>
-          <h2 className={`${playfair.className} mt-4 text-[32px] font-semibold leading-[1.15] text-[#1d2433] sm:text-[44px]`}>
-            {data.title} <span className="italic text-[#c2186a]">{data.title_highlight}</span>
+          <h2 className="mt-3 text-[24px] font-bold leading-tight text-[#1d2433] sm:text-[36px] lg:text-[44px]">
+            {data.title} <span className="text-[#c2186a]">{data.title_highlight}</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-[520px] text-[15px] leading-7 text-[#4b5563] sm:text-[16px] lg:mx-0">{data.description}</p>
+          <p className="mx-auto mt-3 max-w-[520px] text-[14px] sm:text-[16px] leading-relaxed text-[#4b5563] lg:mx-0">{data.description}</p>
           <motion.a
             href={data.button_href}
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#c2186a] px-6 py-3 text-[15px] font-semibold text-white"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#c2186a] px-6 py-3 text-[14px] sm:text-[15px] font-semibold text-white shadow-sm hover:bg-[#a61359] transition-colors"
             whileHover={{ x: 4 }}
           >
             {data.button_text}

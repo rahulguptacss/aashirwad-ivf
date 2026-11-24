@@ -47,7 +47,7 @@ export default function WhyChoose({ data }: { data: WhySectionData }) {
               <Icon name="heart" />
               {data.eyebrow}
             </span>
-            <h2 className="mt-4 max-w-[460px] text-[28px] font-bold leading-[1.2] text-[#1d2433] sm:text-[42px]">
+            <h2 className="mt-3 max-w-[460px] text-[24px] font-bold leading-tight text-[#1d2433] sm:text-[34px] lg:text-[40px]">
               {data.title} <span className="text-[#c2186a]">{data.title_highlight}</span>
             </h2>
           </motion.div>
